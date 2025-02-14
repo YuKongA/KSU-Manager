@@ -13,7 +13,7 @@ import top.yukonga.miuix.kmp.theme.MiuixTheme
 fun InfoText(
     title: String,
     content: String,
-    bottomPadding: Dp = 20.dp
+    bottomPadding: Dp = 23.dp
 ) {
     Text(
         text = title,
@@ -25,6 +25,6 @@ fun InfoText(
         text = content,
         fontSize = MiuixTheme.textStyles.body2.fontSize,
         color = MiuixTheme.colorScheme.onSurfaceVariantSummary,
-        modifier = Modifier.padding(bottom = bottomPadding)
+        modifier = Modifier.padding(top = 2.dp,bottom = bottomPadding)
     )
 }
