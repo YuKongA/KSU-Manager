@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="home">首页</string>
+    <string name="super_user">超级用户</string>
+    <string name="module">模块</string>
+</resources>

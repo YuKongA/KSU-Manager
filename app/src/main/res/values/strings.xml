@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name" translatable="false">KernelSU</string>
+    <string name="home">Home</string>
+    <string name="super_user">Super User</string>
+    <string name="module">Module</string>
+</resources>
