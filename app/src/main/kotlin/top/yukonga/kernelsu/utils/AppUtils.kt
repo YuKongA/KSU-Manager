@@ -2,10 +2,13 @@ package top.yukonga.kernelsu.utils
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.core.content.pm.PackageInfoCompat
 import com.topjohnwu.superuser.Shell
+import top.yukonga.kernelsu.R
 
 @Composable
+@Suppress("DEPRECATION")
 fun getSELinuxStatus(): String {
     val shell = Shell.Builder.create()
         .setFlags(Shell.FLAG_REDIRECT_STDERR)
@@ -19,17 +22,17 @@ fun getSELinuxStatus(): String {
 
     if (result.isSuccess) {
         return when (output) {
-            "Enforcing" -> "Enforcing"
-            "Permissive" -> "Permissive"
-            "Disabled" -> "Disabled"
-            else -> "Unknown"
+            "Enforcing" -> stringResource(R.string.selinux_status_enforcing)
+            "Permissive" -> stringResource(R.string.selinux_status_permissive)
+            "Disabled" -> stringResource(R.string.selinux_status_disabled)
+            else -> stringResource(R.string.selinux_status_unknown)
         }
     }
 
     return if (output.endsWith("Permission denied")) {
-        "Permission denied"
+        stringResource(R.string.selinux_status_enforcing)
     } else {
-        "Unknown"
+        stringResource(R.string.selinux_status_unknown)
     }
 }
 
