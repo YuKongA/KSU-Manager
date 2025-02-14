@@ -1,7 +1,5 @@
 package top.yukonga.kernelsu.ui.component
 
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
@@ -17,24 +15,16 @@ import top.yukonga.miuix.kmp.utils.SmoothRoundedCornerShape
 @Composable
 fun CardView(
     color: Color = MiuixTheme.colorScheme.surface,
-    onClick: (() -> Unit)? = null,
     view: @Composable () -> Unit,
 ) {
-    val modifierThen = if (onClick != null) Modifier.clickable { onClick() } else Modifier
     Card(
         modifier = Modifier
             .fillMaxWidth()
             .padding(horizontal = 12.dp)
             .padding(bottom = 12.dp)
-            .clip(SmoothRoundedCornerShape(CardDefaults.CornerRadius))
-            .then(modifierThen),
+            .clip(SmoothRoundedCornerShape(CardDefaults.CornerRadius)),
         color = color,
     ) {
-        Column(
-            modifier = Modifier
-                .padding(16.dp)
-        ) {
-            view()
-        }
+        view()
     }
 }
