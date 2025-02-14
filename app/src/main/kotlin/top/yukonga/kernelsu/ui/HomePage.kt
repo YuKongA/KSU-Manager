@@ -3,7 +3,6 @@ package top.yukonga.kernelsu.ui
 import android.os.Build
 import android.system.Os
 import android.widget.Toast
-import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Arrangement
@@ -12,18 +11,15 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.CheckCircle
-import androidx.compose.material.icons.rounded.CheckCircle
 import androidx.compose.material.icons.rounded.Link
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -33,9 +29,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.em
 import androidx.compose.ui.unit.sp
 import dev.chrisbanes.haze.HazeState
 import dev.chrisbanes.haze.HazeStyle
@@ -53,11 +47,9 @@ import top.yukonga.miuix.kmp.basic.Icon
 import top.yukonga.miuix.kmp.basic.LazyColumn
 import top.yukonga.miuix.kmp.basic.MiuixScrollBehavior
 import top.yukonga.miuix.kmp.basic.Scaffold
-import top.yukonga.miuix.kmp.basic.Switch
 import top.yukonga.miuix.kmp.basic.Text
 import top.yukonga.miuix.kmp.basic.TopAppBar
 import top.yukonga.miuix.kmp.basic.rememberTopAppBarState
-import top.yukonga.miuix.kmp.extra.SuperDialogDefaults.insideMargin
 import top.yukonga.miuix.kmp.theme.MiuixTheme
 import top.yukonga.miuix.kmp.theme.MiuixTheme.colorScheme
 import top.yukonga.miuix.kmp.utils.getWindowSize
@@ -79,9 +71,9 @@ fun HomePage(
 
     val hazeStyleTopAppBar = HazeStyle(
         blurRadius = 25.dp,
-        backgroundColor = MiuixTheme.colorScheme.background,
+        backgroundColor = colorScheme.background,
         tint = HazeTint(
-            MiuixTheme.colorScheme.background.copy(0.67f)
+            colorScheme.background.copy(0.67f)
         )
     )
 
@@ -137,17 +129,12 @@ fun HomePage(
                                 modifier = Modifier
                                     .fillMaxSize()
                                     .padding(14.dp)
-                                    //.padding(top = 14.dp, start = 14.dp)
                             ) {
                                 Text(
                                     modifier = Modifier.fillMaxWidth(),
-                                    //textAlign = TextAlign.Center,
                                     text = stringResource(R.string.home_working)+workingMode,
                                     fontSize = 20.sp,
                                     fontWeight = FontWeight.SemiBold,
-                                    //color = colorScheme.onSurfaceVariantSummary
-
-
                                 )
                                 Spacer(Modifier.height(8.dp))
                                 Text(
@@ -155,7 +142,6 @@ fun HomePage(
                                     fontSize = 14.sp,
                                     fontWeight = FontWeight.Medium,
                                 )
-//                                Spacer(Modifier.height(10.dp))
                             }
                             Box(
                                 modifier = Modifier.fillMaxSize().offset(38.dp,45.dp),
@@ -188,8 +174,6 @@ fun HomePage(
                                     fontSize = 15.sp,
                                     fontWeight = FontWeight.Medium,
                                     color = colorScheme.onSurfaceVariantSummary
-
-
                                 )
                                 Row (
                                     modifier = Modifier.fillMaxSize(),
@@ -226,8 +210,6 @@ fun HomePage(
                                     fontSize = 15.sp,
                                     fontWeight = FontWeight.Medium,
                                     color = colorScheme.onSurfaceVariantSummary
-
-
                                 )
                                 Row (
                                     modifier = Modifier.fillMaxSize(),
@@ -239,8 +221,6 @@ fun HomePage(
                                         text = ksuModuleCount.toString(),
                                         fontSize = 26.sp,
                                         fontWeight = FontWeight.Bold,
-                                        //color = colorScheme.onSurfaceVariantSummary
-
                                     )
                                     Text(
                                         modifier = Modifier.padding(start = 5.dp, bottom = 3.5.dp),
@@ -256,27 +236,6 @@ fun HomePage(
                         }
                     }
                 }
-//                    BasicComponent(
-//                        title = ,
-//                        summary = stringResource(R.string.home_working_version, ksuVersion) + "\n" +
-//                                stringResource(R.string.home_superuser_count, ksuSuperuserCount) + "\n" +
-//                                stringResource(R.string.home_module_count, ksuModuleCount),
-//                        rightActions = {
-//                            Icon(
-//                                modifier = Modifier
-//                                    .size(40.dp)
-//                                    .padding(end = 12.dp),
-//                                imageVector = Icons.Rounded.CheckCircle,
-//                                tint = MiuixTheme.colorScheme.onSurface,
-//                                contentDescription = null
-//                            )
-//
-//                        },
-//                        onClick = {
-//                            // TODO
-//                        },
-//                        insideMargin = PaddingValues(18.dp)
-//                    )
 
                 CardView {
                     val uname = Os.uname()
@@ -311,7 +270,7 @@ fun HomePage(
                             Icon(
                                 modifier = Modifier.size(28.dp),
                                 imageVector = Icons.Rounded.Link,
-                                tint = MiuixTheme.colorScheme.onSurface,
+                                tint = colorScheme.onSurface,
                                 contentDescription = null
                             )
                         },
@@ -331,7 +290,7 @@ fun HomePage(
                             Icon(
                                 modifier = Modifier.size(28.dp),
                                 imageVector = Icons.Rounded.Link,
-                                tint = MiuixTheme.colorScheme.onSurface,
+                                tint = colorScheme.onSurface,
                                 contentDescription = null
                             )
                         },
