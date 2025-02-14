@@ -14,12 +14,12 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.CheckCircleOutline
+import androidx.compose.material.icons.rounded.Link
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Dp
@@ -44,8 +44,8 @@ fun HomeView(
 ) {
     LazyColumn(
         modifier = Modifier
-            .height(getWindowSize().height.dp)
-            .nestedScroll(topAppBarScrollBehavior.nestedScrollConnection)
+            .height(getWindowSize().height.dp),
+        topAppBarScrollBehavior = topAppBarScrollBehavior
     ) {
         item {
             Spacer(Modifier.height(12.dp + padding.calculateTopPadding()))
@@ -58,31 +58,30 @@ fun HomeView(
                 ) {
                     Icon(
                         modifier = Modifier
-                            .size(28.dp)
+                            .size(34.dp)
                             .padding(start = 6.dp),
                         imageVector = Icons.Rounded.CheckCircleOutline,
                         tint = MiuixTheme.colorScheme.onSurface,
                         contentDescription = null
                     )
-                    Column(modifier = Modifier.padding(start = 24.dp)) {
+                    Column(modifier = Modifier.padding(start = 18.dp)) {
                         Text(
                             text = "工作中 <LKM>",
-                            fontWeight = FontWeight.Bold
+                            fontWeight = FontWeight.Medium
                         )
                         Text(
-                            text = "当前版本：xxxxxx",
+                            text = "当前版本：12345",
                             fontSize = 14.sp
                         )
                         Text(
-                            text = "超级用户数：xxxxxx",
+                            text = "超级用户数：123",
                             fontSize = 14.sp
                         )
                         Text(
-                            text = "模块数：xxxxxx",
+                            text = "模块数：12",
                             fontSize = 14.sp
                         )
                     }
-                    Spacer(modifier = Modifier.weight(1f))
                 }
             }
             CardView {
@@ -112,22 +111,56 @@ fun HomeView(
                     uriHandler.openUri("https://patreon.com/weishu")
                 }
             ) {
-                InfoText(
-                    title = "支持开发",
-                    content = "KernelSU 将保持免费开源，向开发者捐赠以表示支持。",
-                    bottomPadding = 0.dp
-                )
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.SpaceBetween
+                ) {
+                    Column(
+                        modifier = Modifier
+                            .weight(1f)
+                            .padding(end = 6.dp)
+                    ) {
+                        InfoText(
+                            title = "支持开发",
+                            content = "KernelSU 将保持免费开源，向开发者捐赠以表示支持。",
+                            bottomPadding = 0.dp
+                        )
+                    }
+                    Icon(
+                        modifier = Modifier.size(28.dp),
+                        imageVector = Icons.Rounded.Link,
+                        tint = MiuixTheme.colorScheme.onSurface,
+                        contentDescription = null
+                    )
+                }
             }
             CardView(
                 onClick = {
                     uriHandler.openUri("https://kernelsu.org/guide/what-is-kernelsu.html")
                 }
             ) {
-                InfoText(
-                    title = "了解更多",
-                    content = "了解如何安装 KernelSU 以及如何开发模块。",
-                    bottomPadding = 0.dp
-                )
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.SpaceBetween
+                ) {
+                    Column(
+                        modifier = Modifier
+                            .weight(1f)
+                            .padding(end = 6.dp)
+                    ) {
+                        InfoText(
+                            title = "了解更多",
+                            content = "了解如何安装 KernelSU 以及如何开发模块。",
+                            bottomPadding = 0.dp
+                        )
+                    }
+                    Icon(
+                        modifier = Modifier.size(28.dp),
+                        imageVector = Icons.Rounded.Link,
+                        tint = MiuixTheme.colorScheme.onSurface,
+                        contentDescription = null
+                    )
+                }
             }
             Spacer(Modifier.height(padding.calculateBottomPadding() + 12.dp))
         }
@@ -168,7 +201,7 @@ fun InfoText(
     Column {
         Text(
             text = title,
-            fontWeight = FontWeight.Bold
+            fontWeight = FontWeight.Medium
         )
         Text(
             text = content,

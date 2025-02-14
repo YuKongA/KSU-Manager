@@ -1,10 +1,8 @@
 package top.yukonga.kernelsu.utils
 
-import android.content.Context
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
 import androidx.core.content.pm.PackageInfoCompat
-
 import com.topjohnwu.superuser.Shell
 
 @Composable

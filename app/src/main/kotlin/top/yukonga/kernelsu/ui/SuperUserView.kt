@@ -5,7 +5,6 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.unit.dp
 import top.yukonga.miuix.kmp.basic.LazyColumn
 import top.yukonga.miuix.kmp.basic.ScrollBehavior
@@ -18,8 +17,8 @@ fun SansSerifView(
 ) {
     LazyColumn(
         modifier = Modifier
-            .height(getWindowSize().height.dp)
-            .nestedScroll(topAppBarScrollBehavior.nestedScrollConnection)
+            .height(getWindowSize().height.dp),
+        topAppBarScrollBehavior = topAppBarScrollBehavior
     ) {
         item {
             Spacer(Modifier.height(12.dp + padding.calculateTopPadding()))
