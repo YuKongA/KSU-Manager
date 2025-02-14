@@ -21,10 +21,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalUriHandler
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import top.yukonga.kernelsu.R
 import top.yukonga.kernelsu.utils.getManagerVersion
 import top.yukonga.kernelsu.utils.getSELinuxStatus
 import top.yukonga.miuix.kmp.basic.Card
@@ -48,9 +50,13 @@ fun HomeView(
         topAppBarScrollBehavior = topAppBarScrollBehavior
     ) {
         item {
+            val uriHandler = LocalUriHandler.current
             Spacer(Modifier.height(12.dp + padding.calculateTopPadding()))
             CardView(
-                color = Color(0xFFD0E4F8)
+                color = Color(0xFFD0E4F8),
+                onClick = {
+                    // TODO
+                }
             ) {
                 Row(
                     verticalAlignment = Alignment.CenterVertically,
@@ -65,20 +71,28 @@ fun HomeView(
                         contentDescription = null
                     )
                     Column(modifier = Modifier.padding(start = 18.dp)) {
+                        val lkmMode = true // TODO
+                        val workingMode = when (lkmMode) {
+                            true -> " <LKM>"
+                            else -> " <GKI>"
+                        }
+                        val ksuVersion = 12345 // TODO
+                        val ksuSuperuserCount = 123 // TODO
+                        val ksuModuleCount = 12 // TODO
                         Text(
-                            text = "工作中 <LKM>",
+                            text = stringResource(R.string.home_working) + workingMode,
                             fontWeight = FontWeight.Medium
                         )
                         Text(
-                            text = "当前版本：12345",
+                            text = stringResource(R.string.home_working_version, ksuVersion),
                             fontSize = 14.sp
                         )
                         Text(
-                            text = "超级用户数：123",
+                            text = stringResource(R.string.home_superuser_count, ksuSuperuserCount),
                             fontSize = 14.sp
                         )
                         Text(
-                            text = "模块数：12",
+                            text = stringResource(R.string.home_module_count, ksuModuleCount),
                             fontSize = 14.sp
                         )
                     }
@@ -88,24 +102,23 @@ fun HomeView(
                 val uname = Os.uname()
                 val managerVersion = getManagerVersion()
                 InfoText(
-                    title = "内核版本",
+                    title = stringResource(R.string.home_kernel),
                     content = uname.release
                 )
                 InfoText(
-                    title = "管理器版本",
+                    title = stringResource(R.string.home_manager_version),
                     content = "${managerVersion.first} (${managerVersion.second})"
                 )
                 InfoText(
-                    title = "系统指纹",
+                    title = stringResource(R.string.home_fingerprint),
                     content = Build.FINGERPRINT
                 )
                 InfoText(
-                    title = "SELinux 状态",
+                    title = stringResource(R.string.home_selinux_status),
                     content = getSELinuxStatus(),
                     bottomPadding = 0.dp
                 )
             }
-            val uriHandler = LocalUriHandler.current
             CardView(
                 onClick = {
                     uriHandler.openUri("https://patreon.com/weishu")
@@ -121,8 +134,8 @@ fun HomeView(
                             .padding(end = 6.dp)
                     ) {
                         InfoText(
-                            title = "支持开发",
-                            content = "KernelSU 将保持免费开源，向开发者捐赠以表示支持。",
+                            title = stringResource(R.string.home_support_title),
+                            content = stringResource(R.string.home_support_content),
                             bottomPadding = 0.dp
                         )
                     }
@@ -134,9 +147,10 @@ fun HomeView(
                     )
                 }
             }
+            val learnUrl = stringResource(R.string.home_learn_kernelsu_url)
             CardView(
                 onClick = {
-                    uriHandler.openUri("https://kernelsu.org/guide/what-is-kernelsu.html")
+                    uriHandler.openUri(learnUrl)
                 }
             ) {
                 Row(
@@ -149,8 +163,8 @@ fun HomeView(
                             .padding(end = 6.dp)
                     ) {
                         InfoText(
-                            title = "了解更多",
-                            content = "了解如何安装 KernelSU 以及如何开发模块。",
+                            title = stringResource(R.string.home_learn_kernelsu),
+                            content = stringResource(R.string.home_click_to_learn_kernelsu),
                             bottomPadding = 0.dp
                         )
                     }
@@ -179,7 +193,7 @@ fun CardView(
             .fillMaxWidth()
             .padding(horizontal = 12.dp)
             .padding(bottom = 12.dp)
-            .clip(SmoothRoundedCornerShape(CardDefaults.ConorRadius))
+            .clip(SmoothRoundedCornerShape(CardDefaults.CornerRadius))
             .then(modifierThen),
         color = color,
     ) {

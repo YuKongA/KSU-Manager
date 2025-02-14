@@ -71,7 +71,7 @@ fun App() {
                 Icons.Rounded.Home
             ),
             NavigationItem(
-                stringResource(R.string.super_user),
+                stringResource(R.string.superuser),
                 Icons.Rounded.Security
             ),
             NavigationItem(
