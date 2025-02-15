@@ -19,7 +19,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.outlined.CheckCircle
+import androidx.compose.material.icons.rounded.CheckCircleOutline
 import androidx.compose.material.icons.rounded.Link
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -37,11 +37,11 @@ import dev.chrisbanes.haze.HazeTint
 import dev.chrisbanes.haze.hazeEffect
 import dev.chrisbanes.haze.hazeSource
 import top.yukonga.kernelsu.R
-import top.yukonga.kernelsu.ui.component.BasicComponent
 import top.yukonga.kernelsu.ui.component.CardView
 import top.yukonga.kernelsu.ui.component.InfoText
 import top.yukonga.kernelsu.utils.getManagerVersion
 import top.yukonga.kernelsu.utils.getSELinuxStatus
+import top.yukonga.miuix.kmp.basic.BasicComponent
 import top.yukonga.miuix.kmp.basic.Card
 import top.yukonga.miuix.kmp.basic.Icon
 import top.yukonga.miuix.kmp.basic.LazyColumn
@@ -50,7 +50,6 @@ import top.yukonga.miuix.kmp.basic.Scaffold
 import top.yukonga.miuix.kmp.basic.Text
 import top.yukonga.miuix.kmp.basic.TopAppBar
 import top.yukonga.miuix.kmp.basic.rememberTopAppBarState
-import top.yukonga.miuix.kmp.theme.MiuixTheme
 import top.yukonga.miuix.kmp.theme.MiuixTheme.colorScheme
 import top.yukonga.miuix.kmp.utils.getWindowSize
 
@@ -100,7 +99,6 @@ fun HomePage(
             topAppBarScrollBehavior = topAppBarScrollBehavior
         ) {
             item {
-
                 Spacer(Modifier.height(12.dp + padding.calculateTopPadding()))
                 Row(
                     modifier = Modifier
@@ -117,7 +115,6 @@ fun HomePage(
                             .weight(1f),
                         color = if (isSystemInDarkTheme()) Color(0xFF1A3825) else Color(0xFFDFFAE4),
                     ) {
-
                         Box(
                             modifier = Modifier
                                 .fillMaxSize()
@@ -128,15 +125,15 @@ fun HomePage(
                             Column(
                                 modifier = Modifier
                                     .fillMaxSize()
-                                    .padding(14.dp)
+                                    .padding(18.dp)
                             ) {
                                 Text(
                                     modifier = Modifier.fillMaxWidth(),
-                                    text = stringResource(R.string.home_working)+workingMode,
+                                    text = stringResource(R.string.home_working) + workingMode,
                                     fontSize = 20.sp,
                                     fontWeight = FontWeight.SemiBold,
                                 )
-                                Spacer(Modifier.height(8.dp))
+                                Spacer(Modifier.height(2.dp))
                                 Text(
                                     stringResource(R.string.home_working_version, ksuVersion),
                                     fontSize = 14.sp,
@@ -144,12 +141,14 @@ fun HomePage(
                                 )
                             }
                             Box(
-                                modifier = Modifier.fillMaxSize().offset(38.dp,45.dp),
+                                modifier = Modifier
+                                    .fillMaxSize()
+                                    .offset(38.dp, 45.dp),
                                 contentAlignment = Alignment.BottomEnd
-                            ){
+                            ) {
                                 Icon(
                                     modifier = Modifier.size(170.dp),
-                                    imageVector = Icons.Outlined.CheckCircle,
+                                    imageVector = Icons.Rounded.CheckCircleOutline,
                                     tint = Color(0xFF36D167),
                                     contentDescription = null
                                 )
@@ -160,35 +159,39 @@ fun HomePage(
 
                     }
                     Column(
-                        modifier = Modifier.wrapContentHeight().weight(1f)
+                        modifier = Modifier
+                            .wrapContentHeight()
+                            .weight(1f)
                     ) {
                         Card(
                             modifier = Modifier
                                 .fillMaxWidth()
                                 .weight(1f),
-                            insideMargin = PaddingValues(14.dp),
+                            insideMargin = PaddingValues(18.dp),
                         ) {
-                            Column{
+                            Column {
                                 Text(
                                     text = stringResource(R.string.superuser),
-                                    fontSize = 15.sp,
                                     fontWeight = FontWeight.Medium,
+                                    fontSize = 15.sp,
                                     color = colorScheme.onSurfaceVariantSummary
                                 )
-                                Row (
+                                Row(
                                     modifier = Modifier.fillMaxSize(),
-                                    horizontalArrangement = Arrangement.Start,
-                                    verticalAlignment = Alignment.Bottom,
-                                ){
+                                    horizontalArrangement = Arrangement.Start
+                                ) {
                                     Text(
+                                        modifier = Modifier.alignByBaseline(),
                                         text = ksuSuperuserCount.toString(),
                                         fontSize = 26.sp,
-                                        fontWeight = FontWeight.Bold
+                                        fontWeight = FontWeight.Bold,
+                                        color = colorScheme.onSurface
                                     )
                                     Text(
-                                        modifier = Modifier.padding(start = 5.dp, bottom = 3.5.dp),
+                                        modifier = Modifier
+                                            .alignByBaseline()
+                                            .padding(start = 2.dp),
                                         text = "个",
-                                        fontSize = 16.sp,
                                         fontWeight = FontWeight.Medium,
                                         color = colorScheme.onSurfaceVariantSummary
                                     )
@@ -202,37 +205,36 @@ fun HomePage(
                             modifier = Modifier
                                 .fillMaxWidth()
                                 .weight(1f),
-                            insideMargin = PaddingValues(14.dp),
+                            insideMargin = PaddingValues(18.dp),
                         ) {
-                            Column{
+                            Column {
                                 Text(
                                     text = stringResource(R.string.module),
-                                    fontSize = 15.sp,
                                     fontWeight = FontWeight.Medium,
+                                    fontSize = 15.sp,
                                     color = colorScheme.onSurfaceVariantSummary
                                 )
-                                Row (
+                                Row(
                                     modifier = Modifier.fillMaxSize(),
-                                    horizontalArrangement = Arrangement.Start,
-                                    verticalAlignment = Alignment.Bottom,
+                                    horizontalArrangement = Arrangement.Start
                                 ) {
-
                                     Text(
+                                        modifier = Modifier.alignByBaseline(),
                                         text = ksuModuleCount.toString(),
                                         fontSize = 26.sp,
                                         fontWeight = FontWeight.Bold,
+                                        color = colorScheme.onSurface
                                     )
                                     Text(
-                                        modifier = Modifier.padding(start = 5.dp, bottom = 3.5.dp),
+                                        modifier = Modifier
+                                            .alignByBaseline()
+                                            .padding(start = 2.dp),
                                         text = "个",
-                                        fontSize = 16.sp,
                                         fontWeight = FontWeight.Medium,
-                                        color = colorScheme.onSurfaceVariantSummary
+                                        color = colorScheme.onSurfaceVariantSummary,
                                     )
                                 }
-
                             }
-
                         }
                     }
                 }
@@ -241,7 +243,7 @@ fun HomePage(
                     val uname = Os.uname()
                     val managerVersion = getManagerVersion()
                     Column(
-                        modifier = Modifier.padding(19.dp)
+                        modifier = Modifier.padding(18.dp)
                     ) {
                         InfoText(
                             title = stringResource(R.string.home_kernel),
