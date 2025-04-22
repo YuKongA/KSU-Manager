@@ -13,12 +13,12 @@ val pkgName = "top.yukonga.kernelsu"
 @Suppress("UnstableApiUsage")
 android {
     namespace = pkgName
-    compileSdk = 35
+    compileSdk = 36
 
     defaultConfig {
         applicationId = pkgName
         minSdk = 26
-        targetSdk = 35
+        targetSdk = 36
         versionCode = 10003
         versionName = "1.0.3"
     }

@@ -18,6 +18,7 @@ import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentHeight
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.CheckCircleOutline
 import androidx.compose.material.icons.rounded.Link
@@ -25,6 +26,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.res.stringResource
@@ -33,7 +35,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import dev.chrisbanes.haze.HazeState
 import dev.chrisbanes.haze.HazeStyle
-import dev.chrisbanes.haze.HazeTint
 import dev.chrisbanes.haze.hazeEffect
 import dev.chrisbanes.haze.hazeSource
 import top.yukonga.kernelsu.R
@@ -44,18 +45,18 @@ import top.yukonga.kernelsu.utils.getSELinuxStatus
 import top.yukonga.miuix.kmp.basic.BasicComponent
 import top.yukonga.miuix.kmp.basic.Card
 import top.yukonga.miuix.kmp.basic.Icon
-import top.yukonga.miuix.kmp.basic.LazyColumn
 import top.yukonga.miuix.kmp.basic.MiuixScrollBehavior
 import top.yukonga.miuix.kmp.basic.Scaffold
 import top.yukonga.miuix.kmp.basic.Text
 import top.yukonga.miuix.kmp.basic.TopAppBar
-import top.yukonga.miuix.kmp.basic.rememberTopAppBarState
 import top.yukonga.miuix.kmp.theme.MiuixTheme.colorScheme
 import top.yukonga.miuix.kmp.utils.getWindowSize
+import top.yukonga.miuix.kmp.utils.overScrollVertical
 
 @Composable
 fun HomePage(
-    hazeState: HazeState
+    hazeState: HazeState,
+    hazeStyle: HazeStyle
 ) {
     val lkmMode = true // TODO
     val workingMode = when (lkmMode) {
@@ -66,15 +67,7 @@ fun HomePage(
     val ksuSuperuserCount = 123 // TODO
     val ksuModuleCount = 12 // TODO
 
-    val topAppBarScrollBehavior = MiuixScrollBehavior(rememberTopAppBarState())
-
-    val hazeStyleTopAppBar = HazeStyle(
-        blurRadius = 25.dp,
-        backgroundColor = colorScheme.background,
-        tint = HazeTint(
-            colorScheme.background.copy(0.67f)
-        )
-    )
+    val topAppBarScrollBehavior = MiuixScrollBehavior()
 
     val context = LocalContext.current
     val uriHandler = LocalUriHandler.current
@@ -83,10 +76,7 @@ fun HomePage(
         topBar = {
             TopAppBar(
                 color = Color.Transparent,
-                modifier = Modifier.hazeEffect(
-                    state = hazeState,
-                    style = hazeStyleTopAppBar
-                ),
+                modifier = Modifier.hazeEffect(state = hazeState, style = hazeStyle),
                 title = stringResource(R.string.app_name),
                 scrollBehavior = topAppBarScrollBehavior
             )
@@ -95,8 +85,9 @@ fun HomePage(
         LazyColumn(
             modifier = Modifier
                 .hazeSource(state = hazeState)
-                .height(getWindowSize().height.dp),
-            topAppBarScrollBehavior = topAppBarScrollBehavior
+                .height(getWindowSize().height.dp)
+                .overScrollVertical()
+                .nestedScroll(topAppBarScrollBehavior.nestedScrollConnection)
         ) {
             item {
                 Spacer(Modifier.height(12.dp + padding.calculateTopPadding()))
@@ -119,7 +110,11 @@ fun HomePage(
                             modifier = Modifier
                                 .fillMaxSize()
                                 .clickable {
-                                    Toast.makeText(context.applicationContext, "TODO", Toast.LENGTH_SHORT).show()
+                                    Toast.makeText(
+                                        context.applicationContext,
+                                        "TODO",
+                                        Toast.LENGTH_SHORT
+                                    ).show()
                                 }
                         ) {
                             Column(
@@ -281,7 +276,6 @@ fun HomePage(
                         },
                         insideMargin = PaddingValues(18.dp)
                     )
-
                 }
                 val learnUrl = stringResource(R.string.home_learn_kernelsu_url)
                 CardView {
