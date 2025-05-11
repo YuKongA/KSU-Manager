@@ -56,7 +56,8 @@ import top.yukonga.miuix.kmp.utils.overScrollVertical
 @Composable
 fun HomePage(
     hazeState: HazeState,
-    hazeStyle: HazeStyle
+    hazeStyle: HazeStyle,
+    paddingBottom: PaddingValues,
 ) {
     val lkmMode = true // TODO
     val workingMode = when (lkmMode) {
@@ -87,10 +88,14 @@ fun HomePage(
                 .hazeSource(state = hazeState)
                 .height(getWindowSize().height.dp)
                 .overScrollVertical()
-                .nestedScroll(topAppBarScrollBehavior.nestedScrollConnection)
+                .nestedScroll(topAppBarScrollBehavior.nestedScrollConnection),
+            contentPadding = PaddingValues(
+                top = padding.calculateTopPadding() + 12.dp,
+                bottom = paddingBottom.calculateBottomPadding()
+            ),
+            overscrollEffect = null
         ) {
             item {
-                Spacer(Modifier.height(12.dp + padding.calculateTopPadding()))
                 Row(
                     modifier = Modifier
                         .height(200.dp)
@@ -120,7 +125,7 @@ fun HomePage(
                             Column(
                                 modifier = Modifier
                                     .fillMaxSize()
-                                    .padding(18.dp)
+                                    .padding(all = 18.dp)
                             ) {
                                 Text(
                                     modifier = Modifier.fillMaxWidth(),
@@ -296,7 +301,6 @@ fun HomePage(
                         insideMargin = PaddingValues(18.dp)
                     )
                 }
-                Spacer(Modifier.height(padding.calculateBottomPadding() + 12.dp))
             }
         }
     }

@@ -78,9 +78,9 @@ fun App() {
                 userScrollEnabled = false,
                 pageContent = { page ->
                     when (page) {
-                        0 -> HomePage(hazeState = hazeState, hazeStyle = hazeStyle)
-                        1 -> SuperusersPage(hazeState = hazeState, hazeStyle = hazeStyle)
-                        2 -> ModulesPage(hazeState = hazeState, hazeStyle = hazeStyle)
+                        0 -> HomePage(hazeState = hazeState, hazeStyle = hazeStyle, paddingBottom = padding)
+                        1 -> SuperusersPage(hazeState = hazeState, hazeStyle = hazeStyle, paddingBottom = padding)
+                        2 -> ModulesPage(hazeState = hazeState, hazeStyle = hazeStyle, paddingBottom = padding)
                     }
                 }
             )

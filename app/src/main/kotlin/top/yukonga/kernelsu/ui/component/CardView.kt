@@ -21,8 +21,7 @@ fun CardView(
         modifier = Modifier
             .fillMaxWidth()
             .padding(horizontal = 12.dp)
-            .padding(bottom = 12.dp)
-            .clip(SmoothRoundedCornerShape(CardDefaults.CornerRadius)),
+            .padding(bottom = 12.dp),
         color = color,
     ) {
         view()
